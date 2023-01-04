@@ -14,6 +14,7 @@ private:
 public:
 	void setData(int, int, bool);
 	void setStatus(bool);
+	void setNiborNum(int);
 
 	void addNibor();
 	

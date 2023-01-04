@@ -43,3 +43,9 @@ void Cell::addNibor()
 {
 	this->niborNum += 1;
 }
+
+
+void Cell::setNiborNum(int num)
+{
+	this->niborNum = num;
+}

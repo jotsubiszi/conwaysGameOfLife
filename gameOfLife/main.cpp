@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include "Cell.h"
-//#include "Matrix.h"
+#include "Matrix.h"
 
 
 using namespace std;
@@ -47,90 +47,70 @@ int main()
 
 			//									corner
 			if (x == 0 && y == 0) {
-				for (int i = 0; i <= 1; i++) {
-					for (int j = 0; j <= 1; j++) {
+				if (m[x + 1][y + 1].getStatus() == 1) {
+					m[x][y].addNibor();
+				}
 
-						if (i == 0 && j == 0) {
-							continue;
+				if (m[x][y + 1].getStatus() == 1) {
+					m[x][y].addNibor();
+				}
 
-						}
+				if (m[x + 1][y].getStatus() == 1) {
+					m[x][y].addNibor();
 
-						else {
-
-							if (m[x + i][y + j].getStatus() == 1) {
-								m[x][y].addNibor();
-
-							}
-						}
-					}
 				}
 			}
 
 			//									corner
 			if (x == 9 && y == 0) {
-				for (int i = -1; i <= 0; i++) {
-					for (int j = 0; j <= 1; j++) {
+				if (m[x -1][y + 1].getStatus() == 1) {
+					m[x][y].addNibor();
+				}
 
-						if (i == 0 && j == 0) {
-							continue;
+				if (m[x][y + 1].getStatus() == 1) {
+					m[x][y].addNibor();
+				}
 
-						}
+				if (m[x -1][y].getStatus() == 1) {
+					m[x][y].addNibor();
 
-						else {
-
-							if (m[x + i][y + j].getStatus() == 1) {
-								m[x][y].addNibor();
-
-							}
-						}
-					}
 				}
 			}
 
 			//									corner
 			if (x == 0 && y == 9) {
-				for (int i = 0; i <= 1; i++) {
-					for (int j = -1; j <= 0; j++) {
+				if (m[x + 1][y -1].getStatus() == 1) {
+					m[x][y].addNibor();
+				}
 
-						if (i == 0 && j == 0) {
-							continue;
+				if (m[x][y -1].getStatus() == 1) {
+					m[x][y].addNibor();
+				}
 
-						}
+				if (m[x + 1][y].getStatus() == 1) {
+					m[x][y].addNibor();
 
-						else {
-
-							if (m[x + i][y + j].getStatus() == 1) {
-								m[x][y].addNibor();
-
-							}
-						}
-					}
 				}
 			}
 
 			//									corner
 			if (x == 9 && y == 9) {
-				for (int i = -1; i <= 0; i++) {
-					for (int j = -1; j <= 0; j++) {
+				if (m[x -1][y -1].getStatus() == 1) {
+					m[x][y].addNibor();
+				}
 
-						if (i == 0 && j == 0) {
-							continue;
+				if (m[x][y -1].getStatus() == 1) {
+					m[x][y].addNibor();
+				}
 
-						}
+				if (m[x -1][y].getStatus() == 1) {
+					m[x][y].addNibor();
 
-						else {
-
-							if (m[x + i][y + j].getStatus() == 1) {
-								m[x][y].addNibor();
-
-							}
-						}
-					}
 				}
 			}
 		}
 	}
-
+	/*
 	for (x = 0; x <= 9; x++) {
 		for (y = 0; y <= 9; y++) {
 			cout << m[x][y].getNiborNum() << " ";
@@ -144,7 +124,9 @@ int main()
 		}
 
 	}
+	*/
 
-	
+	Matrix matrix;
+	matrix.surrNibor(5, 5);
 	return 0;
 }

@@ -1,1 +1,2 @@
-﻿  gameOfLife.vcxproj -> D:\projects\gameOfLife\gameOfLife\Debug\gameOfLife.exe
+﻿  Matrix.cpp
+E:\chybaGit\conwaysGameOfLife\conwaysGameOfLife\gameOfLife\Matrix.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
