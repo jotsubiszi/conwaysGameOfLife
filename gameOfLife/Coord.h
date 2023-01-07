@@ -7,7 +7,6 @@ private:
 	int Y;
 
 public:
-
 	void setCoordComps(int, int);
 
 	int getCoordComponX();

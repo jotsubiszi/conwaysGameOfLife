@@ -4,27 +4,27 @@
 class Matrix
 {
 private:
-	int maxSize = 10000;
-	int mLenghtX;
-	int mLenghtY;
-
 	Cell** element;
 	
+	const int maxSize = 1250;
+	int mLenghtX;
+	int mLenghtY;
 	
 public:
 	Matrix();
-	//~Matrix();
 	
 	void allNiborsScan();
 	void allNiborsReset();
-	void surrNibor(int, int);
+	void allPrinter();
+	void setAllNewStatus();
 	void setLenghtOfXY(int, int, int);
-
-	void test();
-
-	int checkSize(int, int);
+	void swapStatus(int, int);
 	void randomizer();
-	int getX();
-	int getY();
+	void surrNibor(int, int);
+	
+	int checker(int, int);
+	
+	char printer(int, int);
+
 };
 

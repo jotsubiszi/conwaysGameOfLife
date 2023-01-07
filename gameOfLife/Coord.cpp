@@ -1,6 +1,5 @@
 #include "Coord.h"
 
-
 void Coord::setCoordComps(int x, int y)
 {
 	this->X = x;

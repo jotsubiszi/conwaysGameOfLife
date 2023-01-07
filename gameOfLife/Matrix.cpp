@@ -1,8 +1,6 @@
 #include "Matrix.h"
-#include "Cell.h"
 #include <iostream>
-#include <cstdlib>
-#include<windows.h>
+#include <windows.h>
 
 using namespace std;
 
@@ -18,35 +16,19 @@ Matrix::Matrix()
 		element[i] = new Cell[y];
 		
 		for (int j = 0; j < y; j++) {
-
-
-			// FOR NOW
-			element[i][j].setData(i,j,1);
-			//element[i][4].setStatus(0);
-			//cout <<  i << j << " ";
+			element[i][j].setData(i,j,0);
 			
-		
-		}
-		//cout << "\n";
+		}	
 	}
-	//cout <<  element[2][2].getStatus();
 }
-
-void Matrix::test() 
-{
-	cout <<element[2][2].getStatus();
-}
-
 
 
 void Matrix::allNiborsScan()
 {
-	for (int i = 0; i < this->mLenghtX; i++)
-	{
-		for (int j = 0; j < this->mLenghtY; j++)
-		{
+	for (int i = 0; i < this->mLenghtX; i++){
+		for (int j = 0; j < this->mLenghtY; j++){
 			surrNibor(i, j);
-			cout << element[i][j].getNiborNum() << " ";
+			cout << printer(i,j) << " ";
 		}
 		cout << "\n";
 	}
@@ -55,11 +37,9 @@ void Matrix::allNiborsScan()
 
 void Matrix::allNiborsReset()
 {
-	for (int i = 0; i < this->mLenghtX; i++)
-	{
-		for (int j = 0; j < this->mLenghtY; j++)
-		{
-			element[i][j].setStatus(0);			
+	for (int i = 0; i < this->mLenghtX; i++){
+		for (int j = 0; j < this->mLenghtY; j++){
+			element[i][j].setNiborNum(0);			
 		}
 	}
 }
@@ -80,7 +60,6 @@ void Matrix::surrNibor(int x, int y)
 			else if (element[x + i][y + j].getStatus() == 1) { 
 				element[x][y].addNibor();
 			}
-			//cout << x + i << y + j << "\n";
 		}
 	}
 }
@@ -96,24 +75,43 @@ void Matrix::setLenghtOfXY(int x, int y, int c)
 		cout << "Maxymalny rozmiar tablicy to: " << this->maxSize << "\n";
 		cout << "Podaj x: ";
 		cin >> y;
+
+		if (cin.fail()) {
+			cout << endl << "prosze podac wlasciwe dane" << endl;
+			cin.clear();
+			cin.ignore();
+		}
+
 		cout << "\n";
 		cout << "Podaj y: ";
 		cin >> x;
-		cout << "\n";
-		if (checkSize(x, y) == 1) {
-			this->mLenghtX = x;
-			this->mLenghtY = y;
+
+		if (cin.fail()) {
+			cout << endl << "prosze podac wlasciwe dane" << endl;
+			cin.clear();
+			cin.ignore();
 		}
-		c = checkSize(x, y);
+
+		cout << "\n";
+		if (checker(x, y) == 1) {
+			this->mLenghtX = int(x);
+			this->mLenghtY = int(y);
+		}
+
+		c = checker(int(x), int(y));
 	}
 	cout << "Pomyslnie ustawiono rozmiar " << y << "x" << x << "\n";
 }
 
 
-int Matrix::checkSize(int x, int y)
+int Matrix::checker(int x, int y)
 {
 	if (x * y <= this->maxSize && x*y > 0) {
-		return 1;
+		if (x < 0 || y < 0) {
+			return 0;
+		}
+		else
+			return 1;
 	}
 	else { 
 		return 0; 
@@ -121,35 +119,76 @@ int Matrix::checkSize(int x, int y)
 	
 }
 
+
 void Matrix::randomizer()
 {
+	char tab[1250];
 
 	for (int i = 0; i < this->mLenghtX; i++) {
 		for (int j = 0; j < mLenghtY; j++) {
-			srand((unsigned)time(NULL));
-
 			int random = rand() % 2;
 
 			element[i][j].setStatus(random);
-			cout << element[i][j].getStatus();
+
 			Sleep(1);
 		}
 	}
-	
-
-
 }
 
 
-int Matrix::getX()
+void Matrix::setAllNewStatus()
 {
-	
-	return this->mLenghtX;
+	for (int i = 0; i < this->mLenghtX; i++) {
+		for (int j = 0; j < this->mLenghtY; j++) {
+			switch (element[i][j].getNiborNum()) {
+			case 2:
+				break;
+			case 3:
+				if (element[i][j].getStatus() == 0) {
+					element[i][j].setStatus(1);
+				}
+				break;
+			default:
+				if (element[i][j].getStatus() == 1) {
+					element[i][j].setStatus(0);
+				}
+				break;
+			}
+		}
+	}
 }
 
 
-int Matrix::getY()
+char Matrix::printer(int i, int j)
 {
-	
-	return this->mLenghtY;
+	switch (element[i][j].getStatus()) {
+	case 1:
+		return 'o';
+	case 0:
+		return '.';
+	}
+}
+
+
+void Matrix::swapStatus(int i, int j)
+{
+	switch (element[i][j].getStatus()) {
+	case 1:
+		element[i][j].setStatus(0);
+		break;
+	case 0:
+		element[i][j].setStatus(1);
+		break;
+	}
+}
+
+
+void Matrix::allPrinter()
+{
+	for (int i = 0; i < this->mLenghtX; i++) {
+		for (int j = 0; j < this->mLenghtY; j++) {
+			cout << printer(i, j);
+		}
+		cout << endl;
+	}
 }

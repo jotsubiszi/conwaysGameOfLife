@@ -1,8 +1,4 @@
 #include "Cell.h"
-#include <iostream>
-
-using namespace std;
-
 
 
 void Cell::setStatus(bool s)
@@ -20,15 +16,6 @@ int Cell::getNiborNum()
 bool Cell::getStatus()
 {
 	return this->status;
-}
-
-
-void Cell::printData()
-{
-	cout << "x: " << this->localXY.getCoordComponX() << " " << "y: " << this->localXY.getCoordComponY() << " ";
-	//cout << "status: " << this->getStatus() << " ";
-	//cout << "niborNum: " << this->getNiborNum();
-	cout << '\n';
 }
 
 
