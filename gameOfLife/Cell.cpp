@@ -26,16 +26,16 @@ bool Cell::getStatus()
 void Cell::printData()
 {
 	cout << "x: " << this->localXY.getCoordComponX() << " " << "y: " << this->localXY.getCoordComponY() << " ";
-	cout << "status: " << this->getStatus() << " ";
-	cout << "niborNum: " << this->getNiborNum();
+	//cout << "status: " << this->getStatus() << " ";
+	//cout << "niborNum: " << this->getNiborNum();
 	cout << '\n';
 }
 
 
 void Cell::setData(int x, int y, bool stat)
 {
-	this->setStatus(stat);
 	this->localXY.setCoordComps(x, y);
+	this->setStatus(stat);
 }
 
 
