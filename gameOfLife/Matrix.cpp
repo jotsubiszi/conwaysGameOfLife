@@ -1,5 +1,6 @@
 #include "Matrix.h"
 #include <iostream>
+#include <bitset>
 #include <windows.h>
 
 using namespace std;
@@ -122,17 +123,30 @@ int Matrix::checker(int x, int y)
 
 void Matrix::randomizer()
 {
-	char tab[1250];
-
+	int x = 15;
+	const int a = 32;
+	int b = pow(2, 32);
+	int random = rand() % b;
+	
+	string binary = std::bitset<a>(random).to_string();
+		
 	for (int i = 0; i < this->mLenghtX; i++) {
-		for (int j = 0; j < mLenghtY; j++) {
-			int random = rand() % 2;
-
-			element[i][j].setStatus(random);
-
-			Sleep(1);
+		for (int j = 0; j < this->mLenghtY; j++) {
+			if (binary[x] == '1') {
+				element[i][j].setStatus(1);
+			}	
+			else {
+				element[i][j].setStatus(0);
+			}
+			if (x < a) {
+				x++;
+			}
+			else
+				x = 0;
+			
 		}
 	}
+
 }
 
 
@@ -187,7 +201,7 @@ void Matrix::allPrinter()
 {
 	for (int i = 0; i < this->mLenghtX; i++) {
 		for (int j = 0; j < this->mLenghtY; j++) {
-			cout << printer(i, j);
+			cout << printer(i, j) << " ";
 		}
 		cout << endl;
 	}

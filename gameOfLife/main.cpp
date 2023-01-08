@@ -6,7 +6,7 @@ using namespace std;
 
 int main() 
 {	
-	
+	int gen = 1;
 	int x;
 	int y;
 	int czas;
@@ -59,10 +59,7 @@ int main()
 		}
 	}
 
-
 	system("CLS");
-
-
 	cout << "podaj odstep czasowy pomiedzy generacjami: ";
 	cin >> czas;
 	cout << "\nwcisnij spacje podczas symulacji aby aby zapauzowac symulacje i wyswietlic opcje\n";
@@ -72,7 +69,9 @@ int main()
 
 		m.allNiborsScan();
 		m.setAllNewStatus();
+		cout << "\ngeneracja: " << gen;
 		m.allNiborsReset();
+		gen++;
 
 		if (GetAsyncKeyState(VK_SPACE)) {
 			cout << "\n1. wciœnij spacje by przjsc jedna generacje dalej \n2. wcisnij dowolny klawisz by symulacja dzialala sama";
@@ -82,11 +81,10 @@ int main()
 
 		if (GetAsyncKeyState('N')) {
 			m.randomizer();
+			gen = 1;
 		}
 		Sleep(int(czas));
 		system("CLS");
 	}
 	return 0;
-	
-
 }
