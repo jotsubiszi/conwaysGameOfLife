@@ -1,7 +1,9 @@
 #include "Matrix.h"
 #include <iostream>
-#include <bitset>
 #include <windows.h>
+#include <bitset>
+#include <chrono>
+#include <random>
 
 using namespace std;
 
@@ -124,26 +126,25 @@ int Matrix::checker(int x, int y)
 void Matrix::randomizer()
 {
 	int x = 15;
-	const int a = 32;
-	int b = pow(2, 32);
-	int random = rand() % b;
+	const int a = 64;
 	
+	srand(chrono::steady_clock::now().time_since_epoch().count());
+	
+	mt19937 mt(chrono::steady_clock::now().time_since_epoch().count());
+	int random = mt();
 	string binary = std::bitset<a>(random).to_string();
 		
 	for (int i = 0; i < this->mLenghtX; i++) {
-		for (int j = 0; j < this->mLenghtY; j++) {
+		for (int j = 0; j < this->mLenghtY; j++, x++) {
+			if (x > a) {
+				random = mt();
+				binary = std::bitset<a>(random).to_string();
+				x = 0;
+			}
 			if (binary[x] == '1') {
 				element[i][j].setStatus(1);
-			}	
-			else {
-				element[i][j].setStatus(0);
-			}
-			if (x < a) {
-				x++;
-			}
-			else
-				x = 0;
-			
+				
+			}			
 		}
 	}
 
