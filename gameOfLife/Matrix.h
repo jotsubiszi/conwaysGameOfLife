@@ -10,21 +10,21 @@ private:
 	int mLenghtX;
 	int mLenghtY;
 	
+	void setLenghtOfXY(int, int, int);
+	char printer(int, int);
+	void surrNibor(int, int);
 public:
 	Matrix();
 	
 	void allNiborsScan();
-	void allNiborsReset();
 	void allPrinter();
-	void setAllNewStatus();
-	void setLenghtOfXY(int, int, int);
+	void allNiborsReset();
+	void setAllNewStatus();	
 	void swapStatus(int, int);
 	void randomizer();
-	void surrNibor(int, int);
-	
-	int checker(int, int);
-	
-	char printer(int, int);
+	void properRandomizer();
+	void setAllFalse();
 
+	int checker(int, int);
 };
 

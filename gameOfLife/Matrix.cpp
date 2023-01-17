@@ -73,7 +73,7 @@ void Matrix::setLenghtOfXY(int x, int y, int c)
 	
 	while (c != 1) {
 		if (c == 0) {
-			cout << "Proszê podac inne wymiary\n";
+			cout << "Prosze podac inne wymiary\n";
 		}
 		cout << "Maxymalny rozmiar tablicy to: " << this->maxSize << "\n";
 		cout << "Podaj x: ";
@@ -83,6 +83,7 @@ void Matrix::setLenghtOfXY(int x, int y, int c)
 			cout << endl << "prosze podac wlasciwe dane" << endl;
 			cin.clear();
 			cin.ignore();
+			continue;
 		}
 
 		cout << "\n";
@@ -93,6 +94,7 @@ void Matrix::setLenghtOfXY(int x, int y, int c)
 			cout << endl << "prosze podac wlasciwe dane" << endl;
 			cin.clear();
 			cin.ignore();
+			continue;
 		}
 
 		cout << "\n";
@@ -132,6 +134,7 @@ void Matrix::randomizer()
 	
 	mt19937 mt(chrono::steady_clock::now().time_since_epoch().count());
 	int random = mt();
+
 	string binary = std::bitset<a>(random).to_string();
 		
 	for (int i = 0; i < this->mLenghtX; i++) {
@@ -205,5 +208,63 @@ void Matrix::allPrinter()
 			cout << printer(i, j) << " ";
 		}
 		cout << endl;
+	}
+}
+
+
+void Matrix::properRandomizer()
+{
+	int howMuch = 0;
+	cout << "\npodaj ilosc: ";
+	cin >> howMuch;
+
+	while ((howMuch > (this->mLenghtX * this->mLenghtY)) || (howMuch <= 0)) {
+		cout << "zle dane podaj jeszcze raz: ";
+		cin >> howMuch;
+		if (cin.fail()) {
+			cout << endl << "prosze podac wlasciwe dane" << endl;
+			cin.clear();
+			cin.ignore();
+			howMuch = 0;
+			//continue;
+		}
+	}
+	cout << "pomyslnie wybralo ilosc!\n";
+	system("PAUSE");
+
+	srand(chrono::steady_clock::now().time_since_epoch().count());
+	mt19937 mt(chrono::steady_clock::now().time_since_epoch().count());
+
+	int randomX = mt() % this->mLenghtX;
+	int randomY= mt() % this->mLenghtY;	
+	
+	for (int i = 1; i <= howMuch; i++) {
+		randomX = mt() % this->mLenghtX;
+		randomY = mt() % this->mLenghtY;
+		if (randomX < 0) {
+			randomX = randomX * (-1);
+			
+		}
+		if (randomY < 0) {
+			randomY = randomY * (-1);
+
+		}
+		if (element[randomX][randomY].getStatus() == 0) {
+			element[randomX][randomY].setStatus(1);
+		}
+		else {
+			i--;
+		}
+	}
+}
+
+
+void Matrix::setAllFalse()
+{
+	// TODO: Add your implementation code here.
+	for (int i = 0; i < this->mLenghtX; i++) {
+		for (int j = 0; j < this->mLenghtY; j++) {
+			element[i][j].setStatus(0);
+		}
 	}
 }

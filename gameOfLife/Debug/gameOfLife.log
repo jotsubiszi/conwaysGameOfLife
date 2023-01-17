@@ -1,13 +1,1 @@
-﻿  Matrix.cpp
-E:\chybaGit\conwaysGameOfLife\conwaysGameOfLife\gameOfLife\Matrix.cpp(131,60): warning C4244: 'argument': conversion from '_Rep' to 'unsigned int', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-E:\chybaGit\conwaysGameOfLife\conwaysGameOfLife\gameOfLife\Matrix.cpp(133,65): warning C4244: 'argument': conversion from '_Rep' to 'unsigned int', possible loss of data
-          with
-          [
-              _Rep=__int64
-          ]
-E:\chybaGit\conwaysGameOfLife\conwaysGameOfLife\gameOfLife\Matrix.cpp(185): warning C4715: 'Matrix::printer': not all control paths return a value
-  gameOfLife.vcxproj -> E:\chybaGit\conwaysGameOfLife\conwaysGameOfLife\Debug\gameOfLife.exe
+﻿  main.cpp
