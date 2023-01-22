@@ -48,19 +48,33 @@ void Matrix::allNiborsReset()
 }
 
 
+int Matrix::cooNibConverter(int coord,const int lenght)
+{
+	if (coord > 0 && coord < lenght) {
+		return coord;
+	}
+	else if (coord <= -1) {
+		return lenght - 1;
+	}
+	else if (coord >= lenght) {
+		return 0;
+	}
+}
+
+
 void Matrix::surrNibor(int x, int y)
 {
+	int xNib;
+	int yNib;
+
 	for (int i = -1; i <= 1; i++) {
 		for (int j = -1; j <= 1; j++) {
-
+			xNib = x + i;
+			yNib = y + j;
 			if (i == 0 && j == 0) {
 				continue;
 			}
-			if (x + i < 0 || x + i > mLenghtX - 1 || y + j < 0 || y + j > mLenghtY - 1) {
-				continue;
-			}
-
-			else if (element[x + i][y + j].getStatus() == 1) { 
+			else if (element[cooNibConverter(xNib, mLenghtX)][cooNibConverter(yNib, mLenghtY)].getStatus() == 1) {
 				element[x][y].addNibor();
 			}
 		}
@@ -72,10 +86,11 @@ void Matrix::setLenghtOfXY(int x, int y, int c)
 {
 	
 	while (c != 1) {
+		system("CLS");
 		if (c == 0) {
 			cout << "Prosze podac inne wymiary\n";
 		}
-		cout << "Maxymalny rozmiar tablicy to: " << this->maxSize << "\n";
+		cout << "Maksymalna ilosc elementow to: " << this->maxSize << "\n";
 		cout << "Podaj x: ";
 		cin >> y;
 
@@ -111,17 +126,23 @@ void Matrix::setLenghtOfXY(int x, int y, int c)
 
 int Matrix::checker(int x, int y)
 {
-	if (x * y <= this->maxSize && x*y > 0) {
-		if (x < 0 || y < 0) {
-			return 0;
-		}
-		else
-			return 1;
+	if (x * y <= this->maxSize && x > 0 && y > 0) {
+		return 1;
 	}
 	else { 
 		return 0; 
+	}	
+}
+
+
+int Matrix::placementChecker(int x, int y)
+{
+	if (x < 0 || y < 0 || x > this->mLenghtX - 1 || y > this->mLenghtY - 1) {
+		return 0;
 	}
-	
+	else {
+		return 1;
+	}
 }
 
 
@@ -188,6 +209,17 @@ char Matrix::printer(int i, int j)
 }
 
 
+void Matrix::allPrinter()
+{
+	for (int i = 0; i < this->mLenghtX; i++) {
+		for (int j = 0; j < this->mLenghtY; j++) {
+			cout << printer(i, j) << " ";
+		}
+		cout << endl;
+	}
+}
+
+
 void Matrix::swapStatus(int i, int j)
 {
 	switch (element[i][j].getStatus()) {
@@ -197,17 +229,6 @@ void Matrix::swapStatus(int i, int j)
 	case 0:
 		element[i][j].setStatus(1);
 		break;
-	}
-}
-
-
-void Matrix::allPrinter()
-{
-	for (int i = 0; i < this->mLenghtX; i++) {
-		for (int j = 0; j < this->mLenghtY; j++) {
-			cout << printer(i, j) << " ";
-		}
-		cout << endl;
 	}
 }
 
@@ -226,7 +247,6 @@ void Matrix::properRandomizer()
 			cin.clear();
 			cin.ignore();
 			howMuch = 0;
-			//continue;
 		}
 	}
 	cout << "pomyslnie wybralo ilosc!\n";
@@ -261,7 +281,6 @@ void Matrix::properRandomizer()
 
 void Matrix::setAllFalse()
 {
-	// TODO: Add your implementation code here.
 	for (int i = 0; i < this->mLenghtX; i++) {
 		for (int j = 0; j < this->mLenghtY; j++) {
 			element[i][j].setStatus(0);

@@ -50,9 +50,9 @@ int main()
 			}
 
 			cout << endl;
-
-			if (m.checker(int(x), int(y)) == 1) {
-				m.swapStatus(int(y - 1), int(x - 1));
+			// int() w metodach
+			if (m.placementChecker(x, y) == 1) {
+				m.swapStatus(y, x);
 			}
 			else {
 				cout << "zle dane!" << endl;
@@ -76,12 +76,13 @@ int main()
 
 	while (!GetAsyncKeyState(VK_ESCAPE)) {
 
-		//g³ówny algorytm
+		// g³ówny algorytm 
 		m.allNiborsScan();
 		m.setAllNewStatus();
-		cout << "\ngeneracja: " << gen;
+		cout << "\ngeneracja: " << gen; // bez tego
 		m.allNiborsReset();
-		
+		// g³ówny algorytm 
+
 		gen++;
 
 
