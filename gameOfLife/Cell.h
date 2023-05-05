@@ -9,8 +9,7 @@ private:
 	int niborNum = 0;
 	
 	bool status = false;
-	bool nextStatus = false;
-
+	
 public:
 	void setData(int, int, bool);
 	void setStatus(bool);

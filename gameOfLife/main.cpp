@@ -4,6 +4,7 @@
 
 using namespace std;
 
+
 int main() 
 {	
 	int gen = 1;
@@ -13,16 +14,17 @@ int main()
 
 	Matrix m;
 		
-	cout << "wcisnij ""1"" aby wylosowac stany\nwcisnij ""2"" aby wylosowac wybrana ilosc stanow\nwcisnij ""3"" aby podac je samemu\nalbo cokolwiek by zostawic pusta tablice\n" << endl;
+	cout << "wcisnij ""A"" aby wylosowac stany\nwcisnij ""S"" aby wylosowac wybrana ilosc stanow\nwcisnij ""D"" aby podac je samemu\nalbo cokolwiek by zostawic pusta tablice\n" << endl;
+	
 	system("PAUSE");
-
-	if (GetAsyncKeyState('1')) {	
+	
+	if (GetAsyncKeyState('A')) {	
 		m.randomizer();
 	}
-	else if (GetAsyncKeyState('2')) {
+	else if (GetAsyncKeyState('S')) {
 		m.properRandomizer();
 	}
-	else if (GetAsyncKeyState('3')) {
+	else if (GetAsyncKeyState('D')) {
 		
 		while (!(GetAsyncKeyState(VK_SPACE))) {
 			system("CLS");
@@ -50,7 +52,7 @@ int main()
 			}
 
 			cout << endl;
-			// int() w metodach
+			
 			if (m.placementChecker(x, y) == 1) {
 				m.swapStatus(y, x);
 			}
@@ -76,12 +78,12 @@ int main()
 
 	while (!GetAsyncKeyState(VK_ESCAPE)) {
 
-		// g³ówny algorytm 
+		
 		m.allNiborsScan();
 		m.setAllNewStatus();
-		cout << "\ngeneracja: " << gen; // bez tego
+		cout << "\ngeneracja: " << gen; 
 		m.allNiborsReset();
-		// g³ówny algorytm 
+		
 
 		gen++;
 
@@ -98,6 +100,8 @@ int main()
 			gen = 1;
 		}
 		if (GetAsyncKeyState('M')) {
+			cin.clear();
+			fflush(stdin);
 			m.setAllFalse();
 			m.properRandomizer();
 			gen = 1;

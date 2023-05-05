@@ -11,7 +11,7 @@ private:
 	int mLenghtX;
 	int mLenghtY;
 	
-	void setLenghtOfXY(int, int, int);
+	void setLenghtOfXY();
 	void surrNibor(int, int);
 	
 	char printer(int, int);

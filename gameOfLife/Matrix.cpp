@@ -7,9 +7,12 @@
 
 using namespace std;
 
+/// <summary>
+/// Constructor that makes 2D array of Cell objects
+/// </summary>
 Matrix::Matrix() 
 {
-	setLenghtOfXY(0, 0, 2);
+	setLenghtOfXY();
 
 	int x = this->mLenghtX;
 	int y = this->mLenghtY;
@@ -25,7 +28,9 @@ Matrix::Matrix()
 	}
 }
 
-
+/// <summary>
+/// This function goes through 2D array of Cell, and sets amounts of active neighbors
+/// </summary>
 void Matrix::allNiborsScan()
 {
 	for (int i = 0; i < this->mLenghtX; i++){
@@ -37,7 +42,9 @@ void Matrix::allNiborsScan()
 	}
 }
 
-
+/// <summary>
+/// sets to all Cell amount of active neighbors to 0
+/// </summary>
 void Matrix::allNiborsReset()
 {
 	for (int i = 0; i < this->mLenghtX; i++){
@@ -47,7 +54,14 @@ void Matrix::allNiborsReset()
 	}
 }
 
-
+/// <summary>
+/// this function changes coordinates to check,
+/// so if there is active Cell on border of array,
+/// this function will make Cell on the other side of array, its neighbor
+/// </summary>
+/// <param name="coord">coord of current checking neighbor, in x or y axis</param>
+/// <param name="lenght">lenght of x or y axis</param>
+/// <returns>coord in x or y axis on other side of array, if needed</returns>
 int Matrix::cooNibConverter(int coord,const int lenght)
 {
 	if (coord > 0 && coord < lenght) {
@@ -61,7 +75,11 @@ int Matrix::cooNibConverter(int coord,const int lenght)
 	}
 }
 
-
+/// <summary>
+/// looks and sets a number of active neighbors around current Cell
+/// </summary>
+/// <param name="x">X int in Coord object of current Cell</param>
+/// <param name="y">Y int in Coord object of current Cell</param>
 void Matrix::surrNibor(int x, int y)
 {
 	int xNib;
@@ -81,10 +99,15 @@ void Matrix::surrNibor(int x, int y)
 	}
 }
 
-
-void Matrix::setLenghtOfXY(int x, int y, int c)
+/// <summary>
+/// sets lenght of x and y axis
+/// </summary>
+void Matrix::setLenghtOfXY()
 {
-	
+	int x = 0;
+	int y = 0;
+	int c = 2;
+
 	while (c != 1) {
 		system("CLS");
 		if (c == 0) {
@@ -123,7 +146,12 @@ void Matrix::setLenghtOfXY(int x, int y, int c)
 	cout << "Pomyslnie ustawiono rozmiar " << y << "x" << x << "\n";
 }
 
-
+/// <summary>
+/// checks if x*y is grater than 0 and lower than maxSize
+/// </summary>
+/// <param name="x">user input of x axis</param>
+/// <param name="y">user input of y axis</param>
+/// <returns>True / False</returns>
 int Matrix::checker(int x, int y)
 {
 	if (x * y <= this->maxSize && x > 0 && y > 0) {
@@ -134,7 +162,12 @@ int Matrix::checker(int x, int y)
 	}	
 }
 
-
+/// <summary>
+/// checks if user input is grater than 0 and lower than lenght of array in x or y axis
+/// </summary>
+/// <param name="x">user input of x axis</param>
+/// <param name="y">user input of y axis</param>
+/// <returns>True / False</returns>
 int Matrix::placementChecker(int x, int y)
 {
 	if (x < 0 || y < 0 || x > this->mLenghtX - 1 || y > this->mLenghtY - 1) {
@@ -145,7 +178,9 @@ int Matrix::placementChecker(int x, int y)
 	}
 }
 
-
+/// <summary>
+/// sets random amount of active Cell objects
+/// </summary>
 void Matrix::randomizer()
 {
 	int x = 15;
@@ -174,7 +209,9 @@ void Matrix::randomizer()
 
 }
 
-
+/// <summary>
+/// Function that checks if current Cell object should be active or inactive
+/// </summary>
 void Matrix::setAllNewStatus()
 {
 	for (int i = 0; i < this->mLenghtX; i++) {
@@ -197,7 +234,13 @@ void Matrix::setAllNewStatus()
 	}
 }
 
-
+/// <summary>
+/// checks if Cell is active
+/// </summary>
+/// <param name="i">coord of Cell in x axis</param>
+/// <param name="j">coord of Cell in y axis</param>
+/// <returns>'o' if active
+/// '.' if inactive</returns>
 char Matrix::printer(int i, int j)
 {
 	switch (element[i][j].getStatus()) {
@@ -208,7 +251,9 @@ char Matrix::printer(int i, int j)
 	}
 }
 
-
+/// <summary>
+/// prints all Cell status as 'o' if active or '.' if inactive
+/// </summary>
 void Matrix::allPrinter()
 {
 	for (int i = 0; i < this->mLenghtX; i++) {
@@ -219,7 +264,11 @@ void Matrix::allPrinter()
 	}
 }
 
-
+/// <summary>
+/// if current Cell status is inactive function swaps status to active and vice versa 
+/// </summary>
+/// <param name="i">x axis of Cell</param>
+/// <param name="j">y axis of Cell</param>
 void Matrix::swapStatus(int i, int j)
 {
 	switch (element[i][j].getStatus()) {
@@ -232,7 +281,10 @@ void Matrix::swapStatus(int i, int j)
 	}
 }
 
-
+/// <summary>
+/// user inputs amount of active Cell objects
+/// after that function chooses random Coord of Cell object to set status to active
+/// </summary>
 void Matrix::properRandomizer()
 {
 	int howMuch = 0;
@@ -278,7 +330,9 @@ void Matrix::properRandomizer()
 	}
 }
 
-
+/// <summary>
+/// changes all Cell objects status to inactive
+/// </summary>
 void Matrix::setAllFalse()
 {
 	for (int i = 0; i < this->mLenghtX; i++) {
